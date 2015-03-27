@@ -8,9 +8,10 @@ The stock Arduino Ethernet library with remoteIP() function added to EthernetCli
 - Extract the Ethernet-master folder from the downloaded zip file
 - Rename the folder Ethernet
 - Move the folder to your arduino sketchbook\libraries folder
+- Restart the Arduino IDE if it is open.
 
 #### Usage
-`remoteIP(remoteIPbuffer)`
+`remoteIP(remoteIPbuffer)` - see examples/ChatServer.ino for demonstration of using remoteIP
 - Parameter: remoteIPbuffer - create a 4 byte array: byte remoteIPbuffer[4]; this buffer will contain the remote IP address after the function is called
   - Type: char array
 - Returns: none
