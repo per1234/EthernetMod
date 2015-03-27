@@ -166,3 +166,9 @@ EthernetClient::operator bool() {
 bool EthernetClient::operator==(const EthernetClient& rhs) {
   return _sock == rhs._sock && _sock != MAX_SOCK_NUM && rhs._sock != MAX_SOCK_NUM;
 }
+
+/returns the remote IP address: http://forum.arduino.cc/index.php?topic=82416.0
+uint8_t *EthernetClient::remoteIP(uint8_t remoteIP[]) {
+  W5100.readSnDIPR(_sock, remoteIP);
+  return remoteIP;
+}
