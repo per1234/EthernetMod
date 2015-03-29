@@ -1,5 +1,5 @@
-#include "utility/w5100.h"
-#include "utility/socket.h"
+#include "w5100.h"
+#include "socket.h"
 extern "C" {
 #include "string.h"
 }

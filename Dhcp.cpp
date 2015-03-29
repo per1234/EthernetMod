@@ -1,13 +1,13 @@
 // DHCP Library v0.3 - April 25, 2009
 // Author: Jordan Terrell - blog.jordanterrell.com
 
-#include "utility/w5100.h"
+#include "w5100.h"
 
 #include <string.h>
 #include <stdlib.h>
 #include "Dhcp.h"
 #include "Arduino.h"
-#include "utility/util.h"
+#include "util.h"
 
 int DhcpClass::beginWithDHCP(uint8_t *mac, unsigned long timeout, unsigned long responseTimeout)
 {
@@ -329,9 +329,8 @@ uint8_t DhcpClass::parseDHCPResponse(unsigned long responseTimeout, uint32_t& tr
                 
                 case dhcpServerIdentifier :
                     opt_len = _dhcpUdpSocket.read();
-                    if ((_dhcpDhcpServerIp[0] == 0 && _dhcpDhcpServerIp[1] == 0 &&
-                         _dhcpDhcpServerIp[2] == 0 && _dhcpDhcpServerIp[3] == 0) ||
-                        IPAddress(_dhcpDhcpServerIp) == _dhcpUdpSocket.remoteIP())
+                    if( *((uint32_t*)_dhcpDhcpServerIp) == 0 || 
+                        IPAddress(_dhcpDhcpServerIp) == _dhcpUdpSocket.remoteIP() )
                     {
                         _dhcpUdpSocket.read(_dhcpDhcpServerIp, sizeof(_dhcpDhcpServerIp));
                     }

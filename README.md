@@ -1,7 +1,7 @@
 Modified Arduino Ethernet Library
 ==========
 
-The stock Arduino Ethernet library with remoteIP() function added to EthernetClient. This function returns the IP address of the connected remote TCP server. Thanks to Philgaskin on the Arduino forum: http://forum.arduino.cc/index.php?topic=82416.0
+The stock Arduino IDE 1.0.6 Ethernet library with remoteIP() function added to EthernetClient. This function returns the IP address of the connected remote TCP server. Thanks to Philgaskin on the Arduino forum: http://forum.arduino.cc/index.php?topic=82416.0
 
 #### Installation
 - Download Ethernet library - Click the "Download ZIP" button(or "Clone in Desktop" if you have GitHub Desktop installed)

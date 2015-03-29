@@ -1,5 +1,5 @@
-#include "utility/w5100.h"
-#include "utility/socket.h"
+#include "w5100.h"
+#include "socket.h"
 
 extern "C" {
   #include "string.h"
@@ -12,7 +12,7 @@ extern "C" {
 #include "EthernetServer.h"
 #include "Dns.h"
 
-uint16_t EthernetClient::_srcport = 49152;      //Use IANA recommended ephemeral port range 49152-65535
+uint16_t EthernetClient::_srcport = 1024;
 
 EthernetClient::EthernetClient() : _sock(MAX_SOCK_NUM) {
 }
@@ -40,7 +40,7 @@ int EthernetClient::connect(IPAddress ip, uint16_t port) {
     return 0;
 
   for (int i = 0; i < MAX_SOCK_NUM; i++) {
-    uint8_t s = socketStatus(i);
+    uint8_t s = W5100.readSnSR(i);
     if (s == SnSR::CLOSED || s == SnSR::FIN_WAIT || s == SnSR::CLOSE_WAIT) {
       _sock = i;
       break;
@@ -51,7 +51,7 @@ int EthernetClient::connect(IPAddress ip, uint16_t port) {
     return 0;
 
   _srcport++;
-  if (_srcport == 0) _srcport = 49152;          //Use IANA recommended ephemeral port range 49152-65535
+  if (_srcport == 0) _srcport = 1024;
   socket(_sock, SnMR::TCP, _srcport, 0);
 
   if (!::connect(_sock, rawIPAddress(ip), port)) {
@@ -88,7 +88,7 @@ size_t EthernetClient::write(const uint8_t *buf, size_t size) {
 
 int EthernetClient::available() {
   if (_sock != MAX_SOCK_NUM)
-    return recvAvailable(_sock);
+    return W5100.getRXReceivedSize(_sock);
   return 0;
 }
 
@@ -120,7 +120,8 @@ int EthernetClient::peek() {
 }
 
 void EthernetClient::flush() {
-  ::flush(_sock);
+  while (available())
+    read();
 }
 
 void EthernetClient::stop() {
@@ -153,7 +154,7 @@ uint8_t EthernetClient::connected() {
 
 uint8_t EthernetClient::status() {
   if (_sock == MAX_SOCK_NUM) return SnSR::CLOSED;
-  return socketStatus(_sock);
+  return W5100.readSnSR(_sock);
 }
 
 // the next function allows us to use the client returned by
