@@ -4,16 +4,17 @@
  A simple server that distributes any incoming messages to all
  connected clients.  To use telnet to  your device's IP address and type.
  You can see the client's input in the serial monitor as well.
- Using an Arduino Wiznet Ethernet shield.
+ Using an Arduino Wiznet Ethernet shield or W5100 module.
 
  Circuit:
- * Ethernet shield attached to pins 10, 11, 12, 13
- * Analog inputs attached to pins A0 through A5 (optional)
+ * Ethernet shield or W5100 module attached to pins 10, 11, 12, 13(uno/pro mini/nano/etc.) or pins 10, 51, 50, 52(mega)
 
  created 18 Dec 2009
  by David A. Mellis
  modified 9 Apr 2012
  by Tom Igoe
+ modified 2015-03-27
+ by per1234
 
  */
 
@@ -61,6 +62,10 @@ void loop() {
       // clead out the input buffer:
       client.flush();
       Serial.println("We have a new client");
+      Serial.print("client IP address: ");
+      byte remoteIPbuffer[4];  //create the 4 byte array to hold the client's IP address
+      client.remoteIP(remoteIPbuffer);  //get the client's IP address
+      Serial.println(IPAddress(remoteIPbuffer));
       client.println("Hello, client!");
       alreadyConnected = true;
     }

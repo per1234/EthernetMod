@@ -1,5 +1,5 @@
-#ifndef ethernetclient_h
-#define ethernetclient_h
+#ifndef ethernetclientwithremoteIP_h
+#define ethernetclientwithremoteIP_h
 #include "Arduino.h"	
 #include "Print.h"
 #include "Client.h"
@@ -23,6 +23,7 @@ public:
   virtual void flush();
   virtual void stop();
   virtual uint8_t connected();
+  uint8_t *remoteIP(uint8_t remoteIP[]);  
   virtual operator bool();
   virtual bool operator==(const bool value) { return bool() == value; }
   virtual bool operator!=(const bool value) { return bool() != value; }
