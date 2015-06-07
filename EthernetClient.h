@@ -23,7 +23,7 @@ public:
   virtual void flush();
   virtual void stop();
   virtual uint8_t connected();
-  uint8_t *remoteIP(uint8_t remoteIP[]);
+  virtual IPAddress remoteIP();
   virtual operator bool();
   virtual bool operator==(const EthernetClient&);
   virtual bool operator!=(const EthernetClient& rhs) { return !this->operator==(rhs); };
@@ -38,3 +38,4 @@ private:
 };
 
 #endif
+
