@@ -173,7 +173,8 @@ bool EthernetClient::operator==(const EthernetClient& rhs) {
 }
 
 //returns the remote IP address: http://forum.arduino.cc/index.php?topic=82416.0
-uint8_t *EthernetClient::remoteIP(uint8_t remoteIP[]) {
-  W5100.readSnDIPR(_sock, remoteIP);
-  return remoteIP;
+IPAddress EthernetClient::remoteIP() {
+  byte remoteIParray[4];
+  W5100.readSnDIPR(_sock, remoteIParray);
+  return IPAddress(remoteIParray);
 }

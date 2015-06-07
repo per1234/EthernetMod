@@ -63,9 +63,7 @@ void loop() {
       client.flush();
       Serial.println("We have a new client");
       Serial.print("client IP address: ");
-      byte remoteIPbuffer[4];  //create the 4 byte array to hold the client's IP address
-      client.remoteIP(remoteIPbuffer);  //get the client's IP address
-      Serial.println(IPAddress(remoteIPbuffer));
+      Serial.println(client.remoteIP());
       client.println("Hello, client!");
       alreadyConnected = true;
     }
