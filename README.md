@@ -1,17 +1,21 @@
 Modified Arduino Ethernet Library
 ==========
 
-Modified Arduino Ethernet Library v1.0.3. The standard Ethernet library has a remoteIP() function for UDP communication but not TCP. This modification of the stock library provides the remoteIP() function to EthernetClient so it can be used for TCP communication as well. This function returns the IP address of the connected remote TCP server. Thanks to Philgaskin on the Arduino forum: http://forum.arduino.cc/index.php?topic=82416.0
+Modified [Arduino](http://arduino.cc) Ethernet v1.1.0 library. This modification adds EthernetClent.remoteIP() and EthernetClient.setClientTimeout() functions and removes the delay from Ethernet.begin().
 
+This library supports Wiznet W5100, W200, and W500 Ethernet controllers with automatic detection. Thanks to [Fede85](https://github.com/Fede85).
+
+
+<a id="installation"></a>
 #### Installation
 - This library is only compatible with Arduino versions 1.5 and up. If you are using Arduino IDE 1.0.x then select the Arduino-IDE-1.0.x branch instead.
 - Download the most recent version of the modified Ethernet library here: https://github.com/per1234/Ethernet/archive/Arduino-IDE-1.5plus.zip
 - Open the Arduino IDE
 - Sketch > Include Library > Add ZIP Library... > select the downloaded file > Open
 
-
+<a id="usage"></a>
 #### Usage
-`EthernetClient.remoteIP()` - See examples/ChatServer.ino for demonstration of using remoteIP.
+`EthernetClient.remoteIP()` - See examples/ChatServer.ino for demonstration of using remoteIP. Thanks to [Philgaskin on the Arduino forum](http://forum.arduino.cc/index.php?topic=82416.0).
 - Returns: The IP address of the remote connection.
   - Type: IPAddress
 
