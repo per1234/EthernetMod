@@ -25,8 +25,6 @@ uint16_t W5x00Class::CH_BASE = 0;
 
 void W5x00Class::init(void)
 {
-  delay(300);
-
 #if !defined(SPI_HAS_EXTENDED_CS_PIN_HANDLING)
   SPI.begin();
   initSS();
