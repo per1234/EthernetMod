@@ -134,9 +134,10 @@ public:
 
 class W5x00Chipset {
 public:
-  static const uint8_t W5100 = 0;
-  static const uint8_t W5200 = 1;
-  static const uint8_t W5500 = 2;
+  static const uint8_t unset = 0;
+  static const uint8_t W5100 = 1;
+  static const uint8_t W5200 = 2;
+  static const uint8_t W5500 = 3;
 };
 
 class W5x00Class {

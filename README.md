@@ -9,7 +9,7 @@ This library supports Wiznet W5100, W200, and W500 Ethernet controllers with aut
 <a id="installation"></a>
 #### Installation
 - This library is only compatible with Arduino versions 1.5 and up. If you are using Arduino IDE 1.0.x then select the Arduino-IDE-1.0.x branch instead.
-- Download the most recent version of the modified Ethernet library here: https://github.com/per1234/Ethernet/archive/Arduino-IDE-1.5plus.zip
+- Download the most recent version of the modified Ethernet library here: https://github.com/per1234/EthernetMod/archive/W5x00.zip
 - Open the Arduino IDE
 - Sketch > Include Library > Add ZIP Library... > select the downloaded file > Open
 
@@ -18,6 +18,8 @@ This library supports Wiznet W5100, W200, and W500 Ethernet controllers with aut
 `EthernetClient.remoteIP()` - See examples/ChatServer.ino for demonstration of using remoteIP. Thanks to [Philgaskin on the Arduino forum](http://forum.arduino.cc/index.php?topic=82416.0).
 - Returns: The IP address of the remote connection.
   - Type: IPAddress
+
+I have removed the delay in Ethernet.begin() so you may need to add a delay in your sketch if it is not reliably initializing the Ethernet controller.
 
 For all the standard functions included in the library see the official Arduino Ethernet documentation: http://arduino.cc/en/reference/ethernet
 The read() function in the Client class inherits from Stream so the stream functions are also available, see the Arduino Stream documentation: http://arduino.cc/en/Reference/Stream

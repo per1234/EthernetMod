@@ -36,43 +36,45 @@ void W5x00Class::init(void)
    * Runtime detection of Wiznet Chip.
    * Based on code from: https://github.com/jbkim/Differentiate-WIznet-Chip
    */
-  uint8_t testW5200[] = { 0x00, 0x1F, 0x00, 0x01, 0x00 };
-  uint8_t testW5500[] = { 0x00, 0x39, 0x00, 0x00 };
-  SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
+  if(chipset == W5x00Chipset::unset) {  //only run the W5x00 chipset detection the first time
+    uint8_t testW5200[] = { 0x00, 0x1F, 0x00, 0x01, 0x00 };
+    uint8_t testW5500[] = { 0x00, 0x39, 0x00, 0x00 };
+    SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
 #if !defined(SPI_HAS_EXTENDED_CS_PIN_HANDLING)
-  // Check for W5200
-  setSS();
-  SPI.transfer(testW5200, 5);
-  resetSS();
-  if (testW5200[4] == 0x03) {
-    chipset = W5x00Chipset::W5200;
-  } else {
-    // Check for W5500
+    // Check for W5200
     setSS();
-    SPI.transfer(testW5500, 4);
+    SPI.transfer(testW5200, 5);
     resetSS();
-    if (testW5500[3] == 0x04) {
-      chipset = W5x00Chipset::W5500;
+    if (testW5200[4] == 0x03) {
+      chipset = W5x00Chipset::W5200;
     } else {
-      chipset = W5x00Chipset::W5100;
+      // Check for W5500
+      setSS();
+      SPI.transfer(testW5500, 4);
+      resetSS();
+      if (testW5500[3] == 0x04) {
+        chipset = W5x00Chipset::W5500;
+      } else {
+        chipset = W5x00Chipset::W5100;
+      }
     }
-  }
 #else
-  // Check for W5200
-  SPI.transfer(SPI_CS, testW5200, 5);
-  if (testW5200[4] == 0x03) {
-    chipset = W5x00Chipset::W5200;
-  } else {
-    // Check for W5500
-    SPI.transfer(SPI_CS, testW5500, 4);
-    if (testW5500[3] == 0x04) {
-      chipset = W5x00Chipset::W5500;
+    // Check for W5200
+    SPI.transfer(SPI_CS, testW5200, 5);
+    if (testW5200[4] == 0x03) {
+      chipset = W5x00Chipset::W5200;
     } else {
-      chipset = W5x00Chipset::W5100;
+      // Check for W5500
+      SPI.transfer(SPI_CS, testW5500, 4);
+      if (testW5500[3] == 0x04) {
+        chipset = W5x00Chipset::W5500;
+      } else {
+        chipset = W5x00Chipset::W5100;
+      }
     }
+  #endif
+    SPI.endTransaction();
   }
-#endif
-  SPI.endTransaction();
 
   // W5x00 reset
   // The default size for the RX and TX buffers is 2 kB
