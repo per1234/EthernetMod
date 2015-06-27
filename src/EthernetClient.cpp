@@ -13,6 +13,7 @@ extern "C" {
 #include "Dns.h"
 
 uint16_t EthernetClient::_srcport = 49152;      //Use IANA recommended ephemeral port range 49152-65535
+uint16_t EthernetClient::_timeout = 1000;      //default timeout
 
 EthernetClient::EthernetClient() : _sock(MAX_SOCK_NUM) {
 }
@@ -62,7 +63,7 @@ int EthernetClient::connect(IPAddress ip, uint16_t port) {
   unsigned long start = millis();
   while (status() != SnSR::ESTABLISHED) {
     delay(1);
-    if (status() == SnSR::CLOSED || millis() - start > 1000) {
+    if (status() == SnSR::CLOSED || millis() - start > _timeout) {
       _sock = MAX_SOCK_NUM;
       return 0;
     }
@@ -132,8 +133,8 @@ void EthernetClient::stop() {
   disconnect(_sock);
   unsigned long start = millis();
 
-  // wait a second for the connection to close
-  while (status() != SnSR::CLOSED && millis() - start < 1000)
+  // wait for the connection to close
+  while (status() != SnSR::CLOSED && millis() - start < _timeout)
     delay(1);
 
   // if it hasn't closed, close it forcefully
@@ -173,4 +174,8 @@ IPAddress EthernetClient::remoteIP() {
   byte remoteIParray[4];
   W5100.readSnDIPR(_sock, remoteIParray);
   return IPAddress(remoteIParray);
+}
+
+void EthernetClient::setClientTimeout(uint16_t timeout) {
+  _timeout = timeout;
 }
