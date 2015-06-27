@@ -10,8 +10,11 @@ This library supports Wiznet W5100, W200, and W500 Ethernet controllers with aut
 #### Installation
 - This library is only compatible with Arduino versions 1.5 and up. If you are using Arduino IDE 1.0.x then select the Arduino-IDE-1.0.x branch instead.
 - Download the most recent version of the modified Ethernet library here: https://github.com/per1234/EthernetMod/archive/W5x00.zip
-- Open the Arduino IDE
-- Sketch > Include Library > Add ZIP Library... > select the downloaded file > Open
+- Extract the downloaded file
+- Rename the extracted folder Ethernet
+- Copy the Ethernet folder to the libraries folder under your sketchbook folder
+- Reopen the Arduino IDE
+
 
 <a id="usage"></a>
 #### Usage
