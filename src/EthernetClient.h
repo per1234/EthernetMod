@@ -24,6 +24,7 @@ public:
   virtual void stop();
   virtual uint8_t connected();
   virtual IPAddress remoteIP();
+  virtual void setClientTimeout(uint16_t timeout);
   virtual operator bool();
   virtual bool operator==(const bool value) { return bool() == value; }
   virtual bool operator!=(const bool value) { return bool() != value; }
@@ -37,6 +38,7 @@ public:
 private:
   static uint16_t _srcport;
   uint8_t _sock;
+  static uint16_t _timeout;
 };
 
 #endif
