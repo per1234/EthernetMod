@@ -15,7 +15,7 @@
 // W5x00 controller instance
 W5x00Class W5100;
 
-uint8_t W5x00Class::chipset = W5x00Chipset::W5100;
+uint8_t W5x00Class::chipset = W5x00Chipset::unset;
 uint8_t W5x00Class::sockets = 4;
 uint16_t W5x00Class::CH_BASE = 0;
 
