@@ -85,6 +85,7 @@ void loop() {
     server.write(thisChar);
     // echo the bytes to the server as well:
     Serial.print(thisChar);
+    Ethernet.maintain();
   }
 }
 
