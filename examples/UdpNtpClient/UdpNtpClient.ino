@@ -105,6 +105,7 @@ void loop() {
   }
   // wait ten seconds before asking for the time again
   delay(10000);
+  Ethernet.maintain();
 }
 
 // send an NTP request to the time server at the given address
