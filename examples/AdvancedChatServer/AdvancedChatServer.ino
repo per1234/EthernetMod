@@ -25,10 +25,12 @@
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network.
 // gateway and subnet are optional:
-byte mac[] = { 
-  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192,168,1, 177);
-IPAddress gateway(192,168,1, 1);
+byte mac[] = {
+  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
+};
+IPAddress ip(192, 168, 1, 177);
+IPAddress myDns(192, 168, 1, 1);
+IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 0, 0);
 
 
@@ -38,8 +40,8 @@ EthernetServer server(23);
 EthernetClient clients[4];
 
 void setup() {
-  Ethernet.begin(mac, ip, gateway, subnet);
   // initialize the Ethernet device
+  Ethernet.begin(mac, ip, myDns, gateway, subnet);
   // start listening for clients
   server.begin();
   // Open serial communications and wait for port to open:
