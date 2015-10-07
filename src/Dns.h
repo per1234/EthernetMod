@@ -9,7 +9,7 @@
 
 class DNSClient
 {
-public:
+  public:
     // ctor
     void begin(const IPAddress& aDNSServer);
 
@@ -29,7 +29,7 @@ public:
     */
     int getHostByName(const char* aHostname, IPAddress& aResult);
 
-protected:
+  protected:
     uint16_t BuildRequest(const char* aName);
     uint16_t ProcessResponse(uint16_t aTimeout, IPAddress& aAddress);
 

@@ -36,7 +36,7 @@ void W5x00Class::init(void)
    * Runtime detection of Wiznet Chip.
    * Based on code from: https://github.com/jbkim/Differentiate-WIznet-Chip
    */
-  if(chipset == W5x00Chipset::unset) {  //only run the W5x00 chipset detection the first time
+  if (chipset == W5x00Chipset::unset) { //only run the W5x00 chipset detection the first time
     uint8_t testW5200[] = { 0x00, 0x1F, 0x00, 0x01, 0x00 };
     uint8_t testW5500[] = { 0x00, 0x39, 0x00, 0x00 };
     SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
@@ -72,7 +72,7 @@ void W5x00Class::init(void)
         chipset = W5x00Chipset::W5100;
       }
     }
-  #endif
+#endif
     SPI.endTransaction();
   }
 
@@ -82,12 +82,12 @@ void W5x00Class::init(void)
     sockets = 4;
     CH_BASE = 0x0400;
     SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
-    writeMR(1<<RST);
+    writeMR(1 << RST);
     SPI.endTransaction();
 
     const uint16_t TXBUF_BASE = 0x4000;
     const uint16_t RXBUF_BASE = 0x6000;
-    for (uint8_t i=0; i<sockets; i++) {
+    for (uint8_t i = 0; i < sockets; i++) {
       SBASE[i] = TXBUF_BASE + SSIZE * i;
       RBASE[i] = RXBUF_BASE + RSIZE * i;
     }
@@ -95,12 +95,12 @@ void W5x00Class::init(void)
     sockets = 8;
     CH_BASE = 0x4000;
     SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
-    writeMR(1<<RST);
+    writeMR(1 << RST);
     SPI.endTransaction();
 
     const uint16_t TXBUF_BASE = 0x8000;
     const uint16_t RXBUF_BASE = 0xC000;
-    for (uint8_t i=0; i<sockets; i++) {
+    for (uint8_t i = 0; i < sockets; i++) {
       SBASE[i] = TXBUF_BASE + SSIZE * i;
       RBASE[i] = RXBUF_BASE + RSIZE * i;
     }
@@ -108,14 +108,14 @@ void W5x00Class::init(void)
     sockets = 8;
     CH_BASE = 0x0400;
     SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
-    writeMR(1<<RST);
+    writeMR(1 << RST);
     SPI.endTransaction();
   }
 }
 
 uint16_t W5x00Class::getTXFreeSize(SOCKET s)
 {
-  uint16_t val=0, val1=0;
+  uint16_t val = 0, val1 = 0;
   do {
     val1 = readSnTX_FSR(s);
     if (val1 != 0)
@@ -127,7 +127,7 @@ uint16_t W5x00Class::getTXFreeSize(SOCKET s)
 
 uint16_t W5x00Class::getRXReceivedSize(SOCKET s)
 {
-  uint16_t val=0,val1=0;
+  uint16_t val = 0, val1 = 0;
   do {
     val1 = readSnRX_RSR(s);
     if (val1 != 0)
@@ -161,7 +161,7 @@ void W5x00Class::send_data_processing_offset(SOCKET s, uint16_t data_offset, con
       write(dstAddr, 0x00, data, len);
     }
   } else {
-    write(ptr, (s<<5) + 0x14, data, len);
+    write(ptr, (s << 5) + 0x14, data, len);
   }
 
   ptr += len;
@@ -193,7 +193,7 @@ void W5x00Class::read_data(SOCKET s, uint16_t src, uint8_t *dst, uint16_t len)
       read(src_ptr, 0x00, dst, len);
     }
   } else {
-    read(src, (s<<5) + 0x18, dst, len);
+    read(src, (s << 5) + 0x18, dst, len);
   }
 }
 
@@ -246,13 +246,13 @@ uint16_t W5x00Class::write(uint16_t _addr, uint8_t _cb, const uint8_t *_buf, uin
 {
 #if !defined(SPI_HAS_EXTENDED_CS_PIN_HANDLING)
   if (chipset == W5x00Chipset::W5100) {
-    for (uint16_t i=0; i<_len; i++)
+    for (uint16_t i = 0; i < _len; i++)
     {
       setSS();
       SPI.transfer(0xF0);
       SPI.transfer(_addr >> 8);
       SPI.transfer(_addr & 0xFF);
-       _addr++;
+      _addr++;
       SPI.transfer(_buf[i]);
       resetSS();
     }
@@ -264,7 +264,7 @@ uint16_t W5x00Class::write(uint16_t _addr, uint8_t _cb, const uint8_t *_buf, uin
     SPI.transfer(_addr & 0xFF);
     SPI.transfer(0x80 | ((_len & 0x7F00) >> 8));
     SPI.transfer(_len & 0xFF);
-    for (uint16_t i=0; i<_len; i++) {
+    for (uint16_t i = 0; i < _len; i++) {
       SPI.transfer(_buf[i]);
     }
     resetSS();
@@ -273,7 +273,7 @@ uint16_t W5x00Class::write(uint16_t _addr, uint8_t _cb, const uint8_t *_buf, uin
     SPI.transfer(_addr >> 8);
     SPI.transfer(_addr & 0xFF);
     SPI.transfer(_cb);
-    for (uint16_t i=0; i<_len; i++) {
+    for (uint16_t i = 0; i < _len; i++) {
       SPI.transfer(_buf[i]);
     }
     resetSS();
@@ -281,7 +281,7 @@ uint16_t W5x00Class::write(uint16_t _addr, uint8_t _cb, const uint8_t *_buf, uin
 #else
   uint16_t i;
   if (chipset == W5x00Chipset::W5100) {
-    for (i=0; i<_len; i++)
+    for (i = 0; i < _len; i++)
     {
       SPI.transfer(SPI_CS, 0xF0, SPI_CONTINUE);
       SPI.transfer(SPI_CS, _addr >> 8, SPI_CONTINUE);
@@ -296,7 +296,7 @@ uint16_t W5x00Class::write(uint16_t _addr, uint8_t _cb, const uint8_t *_buf, uin
     SPI.transfer(SPI_CS, _addr & 0xFF, SPI_CONTINUE);
     SPI.transfer(SPI_CS, 0x80 | ((_len & 0x7F00) >> 8), SPI_CONTINUE);
     SPI.transfer(SPI_CS, _len & 0xFF, SPI_CONTINUE);
-    for (i=0; i<_len-1; i++) {
+    for (i = 0; i < _len - 1; i++) {
       SPI.transfer(SPI_CS, _buf[i], SPI_CONTINUE);
     }
     SPI.transfer(SPI_CS, _buf[i]);
@@ -304,7 +304,7 @@ uint16_t W5x00Class::write(uint16_t _addr, uint8_t _cb, const uint8_t *_buf, uin
     SPI.transfer(SPI_CS, _addr >> 8, SPI_CONTINUE);
     SPI.transfer(SPI_CS, _addr & 0xFF, SPI_CONTINUE);
     SPI.transfer(SPI_CS, _cb, SPI_CONTINUE);
-    for (i=0; i<_len-1; i++) {
+    for (i = 0; i < _len - 1; i++) {
       SPI.transfer(SPI_CS, _buf[i], SPI_CONTINUE);
     }
     SPI.transfer(SPI_CS, _buf[i]);
@@ -362,7 +362,7 @@ uint16_t W5x00Class::read(uint16_t _addr, uint8_t _cb, uint8_t *_buf, uint16_t _
 {
 #if !defined(SPI_HAS_EXTENDED_CS_PIN_HANDLING)
   if (chipset == W5x00Chipset::W5100) {
-    for (uint16_t i=0; i<_len; i++)
+    for (uint16_t i = 0; i < _len; i++)
     {
       setSS();
       SPI.transfer(0x0F);
@@ -378,7 +378,7 @@ uint16_t W5x00Class::read(uint16_t _addr, uint8_t _cb, uint8_t *_buf, uint16_t _
     SPI.transfer(_addr & 0xFF);
     SPI.transfer((_len & 0x7F00) >> 8);
     SPI.transfer(_len & 0xFF);
-    for (uint16_t i=0; i<_len; i++){
+    for (uint16_t i = 0; i < _len; i++) {
       _buf[i] = SPI.transfer(0);
     }
     resetSS();
@@ -387,7 +387,7 @@ uint16_t W5x00Class::read(uint16_t _addr, uint8_t _cb, uint8_t *_buf, uint16_t _
     SPI.transfer(_addr >> 8);
     SPI.transfer(_addr & 0xFF);
     SPI.transfer(_cb);
-    for (uint16_t i=0; i<_len; i++){
+    for (uint16_t i = 0; i < _len; i++) {
       _buf[i] = SPI.transfer(0);
     }
     resetSS();
@@ -395,7 +395,7 @@ uint16_t W5x00Class::read(uint16_t _addr, uint8_t _cb, uint8_t *_buf, uint16_t _
 #else
   uint16_t i;
   if (chipset == W5x00Chipset::W5100) {
-    for (i=0; i<_len; i++)
+    for (i = 0; i < _len; i++)
     {
       SPI.transfer(SPI_CS, 0x0F, SPI_CONTINUE);
       SPI.transfer(SPI_CS, _addr >> 8, SPI_CONTINUE);
@@ -408,18 +408,18 @@ uint16_t W5x00Class::read(uint16_t _addr, uint8_t _cb, uint8_t *_buf, uint16_t _
     SPI.transfer(SPI_CS, _addr & 0xFF, SPI_CONTINUE);
     SPI.transfer(SPI_CS, (_len & 0x7F00) >> 8, SPI_CONTINUE);
     SPI.transfer(SPI_CS, _len & 0xFF, SPI_CONTINUE);
-    for (i=0; i<_len-1; i++){
+    for (i = 0; i < _len - 1; i++) {
       _buf[i] = SPI.transfer(SPI_CS, 0, SPI_CONTINUE);
     }
-    _buf[_len-1] = SPI.transfer(SPI_CS, 0);
+    _buf[_len - 1] = SPI.transfer(SPI_CS, 0);
   } else {
     SPI.transfer(SPI_CS, _addr >> 8, SPI_CONTINUE);
     SPI.transfer(SPI_CS, _addr & 0xFF, SPI_CONTINUE);
     SPI.transfer(SPI_CS, _cb, SPI_CONTINUE);
-    for (i=0; i<_len-1; i++){
+    for (i = 0; i < _len - 1; i++) {
       _buf[i] = SPI.transfer(SPI_CS, 0, SPI_CONTINUE);
     }
-    _buf[_len-1] = SPI.transfer(SPI_CS, 0);
+    _buf[_len - 1] = SPI.transfer(SPI_CS, 0);
   }
 #endif
 
@@ -433,4 +433,3 @@ void W5x00Class::execCmdSn(SOCKET s, SockCMD _cmd) {
   while (readSnCR(s))
     ;
 }
-

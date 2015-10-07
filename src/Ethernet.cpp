@@ -3,10 +3,12 @@
 #include "Dhcp.h"
 
 // XXX: don't make assumptions about the value of MAX_SOCK_NUM.
-uint8_t EthernetClass::_state[MAX_SOCK_NUM] = { 
-  0, 0, 0, 0 };
-uint16_t EthernetClass::_server_port[MAX_SOCK_NUM] = { 
-  0, 0, 0, 0 };
+uint8_t EthernetClass::_state[MAX_SOCK_NUM] = {
+  0, 0, 0, 0
+};
+uint16_t EthernetClass::_server_port[MAX_SOCK_NUM] = {
+  0, 0, 0, 0
+};
 
 int EthernetClass::begin(uint8_t *mac_address)
 {
@@ -18,12 +20,12 @@ int EthernetClass::begin(uint8_t *mac_address)
   W5100.init();
   SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
   W5100.setMACAddress(mac_address);
-  W5100.setIPAddress(IPAddress(0,0,0,0).raw_address());
+  W5100.setIPAddress(IPAddress(0, 0, 0, 0).raw_address());
   SPI.endTransaction();
 
   // Now try to get our config info from a DHCP server
   int ret = _dhcp->beginWithDHCP(mac_address);
-  if(ret == 1)
+  if (ret == 1)
   {
     // We've successfully found a DHCP server and got our configuration info, so set things
     // accordingly
@@ -74,12 +76,12 @@ void EthernetClass::begin(uint8_t *mac, IPAddress local_ip, IPAddress dns_server
   _dnsServerAddress = dns_server;
 }
 
-int EthernetClass::maintain(){
+int EthernetClass::maintain() {
   int rc = DHCP_CHECK_NONE;
-  if(_dhcp != NULL){
+  if (_dhcp != NULL) {
     //we have a pointer to dhcp, use it
     rc = _dhcp->checkLease();
-    switch ( rc ){
+    switch ( rc ) {
       case DHCP_CHECK_NONE:
         //nothing done
         break;

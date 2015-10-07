@@ -2,7 +2,7 @@
 #include "utility/socket.h"
 
 extern "C" {
-  #include "string.h"
+#include "string.h"
 }
 
 #include "Arduino.h"
@@ -59,7 +59,7 @@ int EthernetClient::connect(IPAddress ip, uint16_t port) {
     _sock = MAX_SOCK_NUM;
     return 0;
   }
- 
+
   unsigned long start = millis();
   while (status() != SnSR::ESTABLISHED) {
     delay(1);
@@ -147,10 +147,10 @@ void EthernetClient::stop() {
 
 uint8_t EthernetClient::connected() {
   if (_sock == MAX_SOCK_NUM) return 0;
-  
+
   uint8_t s = status();
   return !(s == SnSR::LISTEN || s == SnSR::CLOSED || s == SnSR::FIN_WAIT ||
-    (s == SnSR::CLOSE_WAIT && !available()));
+           (s == SnSR::CLOSE_WAIT && !available()));
 }
 
 uint8_t EthernetClient::status() {
