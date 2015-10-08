@@ -78,38 +78,27 @@ void W5x00Class::init(void)
 
   // W5x00 reset
   // The default size for the RX and TX buffers is 2 kB
-  if (chipset == W5x00Chipset::W5100) {
-    sockets = 4;
-    CH_BASE = 0x0400;
-    SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
-    writeMR(1 << RST);
-    SPI.endTransaction();
 
-    const uint16_t TXBUF_BASE = 0x4000;
-    const uint16_t RXBUF_BASE = 0x6000;
+  CH_BASE = 0x0400;
+  SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
+  writeMR(1 << RST);
+  SPI.endTransaction();
+  sockets = 8;  //W5200/500
+  if (chipset != W5x00Chipset::W5500) {
+    //chipset == W5x00Chipset::W5200
+    uint16_t TXBUF_BASE = 0x8000;
+    uint16_t RXBUF_BASE = 0xC000;
+
+    if (chipset == W5x00Chipset::W5100) {
+      sockets = 4;
+
+      TXBUF_BASE = 0x4000;
+      RXBUF_BASE = 0x6000;
+    }
     for (uint8_t i = 0; i < sockets; i++) {
       SBASE[i] = TXBUF_BASE + SSIZE * i;
       RBASE[i] = RXBUF_BASE + RSIZE * i;
     }
-  } else if (chipset == W5x00Chipset::W5200) {
-    sockets = 8;
-    CH_BASE = 0x4000;
-    SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
-    writeMR(1 << RST);
-    SPI.endTransaction();
-
-    const uint16_t TXBUF_BASE = 0x8000;
-    const uint16_t RXBUF_BASE = 0xC000;
-    for (uint8_t i = 0; i < sockets; i++) {
-      SBASE[i] = TXBUF_BASE + SSIZE * i;
-      RBASE[i] = RXBUF_BASE + RSIZE * i;
-    }
-  } else { // W5500
-    sockets = 8;
-    CH_BASE = 0x0400;
-    SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
-    writeMR(1 << RST);
-    SPI.endTransaction();
   }
 }
 
