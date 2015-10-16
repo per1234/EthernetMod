@@ -1,7 +1,7 @@
 Modified Arduino Ethernet Library
 ==========
 
-Modified [Arduino](http://arduino.cc) Ethernet v1.1.0 library. This modification adds EthernetClent.remoteIP() and EthernetClient.setClientTimeout() functions and removes the delay from Ethernet.begin().
+Modified [Arduino](http://arduino.cc) Ethernet library. This modification adds EthernetClent.remoteIP() and EthernetClient.setClientTimeout() functions and removes the delay from Ethernet.begin().
 
 This library supports Wiznet W5100, W200, and W500 Ethernet controllers with automatic detection. Thanks to [Fede85](https://github.com/Fede85).
 
