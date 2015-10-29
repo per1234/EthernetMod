@@ -1,4 +1,5 @@
-#ifndef ethernetclientwithremoteIP_h
+#ifndef ethernetclient_h
+#define ethernetclient_h
 #define ethernetclientwithremoteIP_h
 #include "Arduino.h"
 #include "Print.h"
