@@ -20,6 +20,10 @@ Modified version of the [Arduino](http://arduino.cc) Ethernet v1.0.3 library. Th
 - Returns: The IP address of the remote connection.
   - Type: IPAddress
 
+`EthernetClient.remotePort()` - See examples/ChatServer.ino for demonstration of using remotePort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
+- Returns: The port of the remote connection.
+  - Type: unsigned int
+
 `EthernetClient.setClientTimeout(timeout)` - Set the timeout duration for EthernetClient.connect() and EthernetClient.stop(). The initial value is 1000ms.
 - Parameter: **timeout** - (ms)The timeout duration value.
   - Type: unsigned int
