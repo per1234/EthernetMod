@@ -176,6 +176,13 @@ IPAddress EthernetClient::remoteIP() {
   return IPAddress(remoteIParray);
 }
 
+uint16_t EthernetClient::remotePort() {
+  if (_sock == MAX_SOCK_NUM){
+    return 0;
+  }
+  return W5100.readSnDPORT(_sock);
+}
+
 void EthernetClient::setClientTimeout(uint16_t timeout) {
   _timeout = timeout;
 }

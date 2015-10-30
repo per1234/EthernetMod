@@ -63,6 +63,8 @@ void loop() {
       Serial.println("We have a new client");
       Serial.print("client IP address: ");
       Serial.println(client.remoteIP());
+      Serial.print("client port: ");
+      Serial.println(client.remotePort());
       client.println("Hello, client!");
       alreadyConnected = true;
     }
@@ -77,6 +79,3 @@ void loop() {
     }
   }
 }
-
-
-

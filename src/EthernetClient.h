@@ -25,6 +25,7 @@ class EthernetClient : public Client {
     virtual void stop();
     virtual uint8_t connected();
     virtual IPAddress remoteIP();
+    virtual uint16_t remotePort();
     virtual void setClientTimeout(uint16_t timeout);
     virtual operator bool();
     virtual bool operator==(const bool value) {
