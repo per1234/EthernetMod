@@ -24,6 +24,7 @@ class EthernetClient : public Client {
     virtual void flush();
     virtual void stop();
     virtual uint8_t connected();
+    virtual uint16_t localPort();
     virtual IPAddress remoteIP();
     virtual uint16_t remotePort();
     virtual void setClientTimeout(uint16_t timeout);

@@ -61,6 +61,8 @@ void loop() {
       // clear out the input buffer:
       client.flush();
       Serial.println("We have a new client");
+      Serial.print("local port: ");
+      Serial.println(client.localPort());
       Serial.print("client IP address: ");
       Serial.println(client.remoteIP());
       Serial.print("client port: ");
