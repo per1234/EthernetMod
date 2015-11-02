@@ -169,15 +169,24 @@ bool EthernetClient::operator==(const EthernetClient& rhs) {
   return _sock == rhs._sock && _sock != MAX_SOCK_NUM && rhs._sock != MAX_SOCK_NUM;
 }
 
-//returns the remote IP address: http://forum.arduino.cc/index.php?topic=82416.0
+// from: https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd
+uint16_t EthernetClient::localPort() {
+  if (_sock == MAX_SOCK_NUM) {
+    return 0;
+  }
+  return W5100.readSnPORT(_sock);
+}
+
+// returns the remote IP address: http://forum.arduino.cc/index.php?topic=82416.0
 IPAddress EthernetClient::remoteIP() {
   byte remoteIParray[4];
   W5100.readSnDIPR(_sock, remoteIParray);
   return IPAddress(remoteIParray);
 }
 
+// from: https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75
 uint16_t EthernetClient::remotePort() {
-  if (_sock == MAX_SOCK_NUM){
+  if (_sock == MAX_SOCK_NUM) {
     return 0;
   }
   return W5100.readSnDPORT(_sock);

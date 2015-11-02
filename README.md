@@ -26,6 +26,10 @@ This library supports Wiznet W5100, W200, and W500 Ethernet controllers with aut
 - Returns: The port of the remote connection.
   - Type: unsigned int
 
+`EthernetClient.localPort()` - See examples/ChatServer.ino for demonstration of using localPort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
+- Returns: The local port the client is connected to.
+  - Type: unsigned int
+
 `EthernetClient.setClientTimeout(timeout)` - Set the timeout duration for EthernetClient.connect() and EthernetClient.stop(). The initial value is 1000ms.
 - Parameter: **timeout** - (ms)The timeout duration value.
   - Type: unsigned int
