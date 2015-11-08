@@ -1,7 +1,7 @@
 Modified Arduino Ethernet Library
 ==========
 
-Modified version of the [Arduino](http://arduino.cc) Ethernet v1.0.3 library. The standard Ethernet library has a remoteIP() function for UDP communication but not TCP. This modification of the stock library provides the remoteIP() function to EthernetClient so it can be used for TCP communication as well. This function returns the IP address of the connected remote TCP server. Thanks to Philgaskin on the Arduino forum: http://forum.arduino.cc/index.php?topic=82416.0
+Modified version of the [Arduino](http://arduino.cc) Ethernet v1.1.1 library. The standard Ethernet library has a remoteIP() function for UDP communication but not TCP. This modification of the stock library provides the remoteIP() function to EthernetClient so it can be used for TCP communication as well. This function returns the IP address of the connected remote TCP server. Thanks to Philgaskin on the Arduino forum: http://forum.arduino.cc/index.php?topic=82416.0
 
 
 <a id="installation"></a>

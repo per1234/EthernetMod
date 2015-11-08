@@ -4,9 +4,9 @@
 static uint16_t local_port;
 
 /**
- * @brief  This Socket function initialize the channel in perticular mode, and set the port and wait for W5100 done it.
- * @return  1 for success else 0.
- */
+   @brief  This Socket function initialize the channel in perticular mode, and set the port and wait for W5100 done it.
+   @return  1 for success else 0.
+*/
 uint8_t socket(SOCKET s, uint8_t protocol, uint16_t port, uint8_t flag)
 {
   if ((protocol == SnMR::TCP) || (protocol == SnMR::UDP) || (protocol == SnMR::IPRAW) || (protocol == SnMR::MACRAW) || (protocol == SnMR::PPPOE))
@@ -41,8 +41,8 @@ uint8_t socketStatus(SOCKET s)
 
 
 /**
- * @brief This function close the socket and parameter is "s" which represent the socket number
- */
+   @brief This function close the socket and parameter is "s" which represent the socket number
+*/
 void close(SOCKET s)
 {
   SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
@@ -53,9 +53,9 @@ void close(SOCKET s)
 
 
 /**
- * @brief This function established  the connection for the channel in passive (server) mode. This function waits for the request from the peer.
- * @return  1 for success else 0.
- */
+   @brief This function established  the connection for the channel in passive (server) mode. This function waits for the request from the peer.
+   @return  1 for success else 0.
+*/
 uint8_t listen(SOCKET s)
 {
   SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
@@ -70,11 +70,11 @@ uint8_t listen(SOCKET s)
 
 
 /**
- * @brief This function established  the connection for the channel in Active (client) mode.
- *    This function waits for the untill the connection is established.
- *
- * @return  1 for success else 0.
- */
+   @brief This function established  the connection for the channel in Active (client) mode.
+      This function waits for the untill the connection is established.
+
+   @return  1 for success else 0.
+*/
 uint8_t connect(SOCKET s, uint8_t * addr, uint16_t port)
 {
   if
@@ -98,9 +98,9 @@ uint8_t connect(SOCKET s, uint8_t * addr, uint16_t port)
 
 
 /**
- * @brief This function used for disconnect the socket and parameter is "s" which represent the socket number
- * @return  1 for success else 0.
- */
+   @brief This function used for disconnect the socket and parameter is "s" which represent the socket number
+   @return  1 for success else 0.
+*/
 void disconnect(SOCKET s)
 {
   SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
@@ -110,9 +110,9 @@ void disconnect(SOCKET s)
 
 
 /**
- * @brief This function used to send the data in TCP mode
- * @return  1 for success else 0.
- */
+   @brief This function used to send the data in TCP mode
+   @return  1 for success else 0.
+*/
 uint16_t send(SOCKET s, const uint8_t * buf, uint16_t len)
 {
   uint8_t status = 0;
@@ -167,11 +167,11 @@ uint16_t send(SOCKET s, const uint8_t * buf, uint16_t len)
 
 
 /**
- * @brief This function is an application I/F function which is used to receive the data in TCP mode.
- *    It continues to wait for data as much as the application wants to receive.
- *
- * @return  received data size for success else -1.
- */
+   @brief This function is an application I/F function which is used to receive the data in TCP mode.
+      It continues to wait for data as much as the application wants to receive.
+
+   @return  received data size for success else -1.
+*/
 int16_t recv(SOCKET s, uint8_t *buf, int16_t len)
 {
   // Check how much data is available
@@ -217,10 +217,10 @@ int16_t recvAvailable(SOCKET s)
 
 
 /**
- * @brief Returns the first byte in the receive queue (no checking)
- *
- * @return
- */
+   @brief Returns the first byte in the receive queue (no checking)
+
+   @return
+*/
 uint16_t peek(SOCKET s, uint8_t *buf)
 {
   SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
@@ -231,11 +231,11 @@ uint16_t peek(SOCKET s, uint8_t *buf)
 
 
 /**
- * @brief This function is an application I/F function which is used to send the data for other then TCP mode.
- *    Unlike TCP transmission, The peer's destination address and the port is needed.
- *
- * @return  This function return send data size for success else -1.
- */
+   @brief This function is an application I/F function which is used to send the data for other then TCP mode.
+      Unlike TCP transmission, The peer's destination address and the port is needed.
+
+   @return  This function return send data size for success else -1.
+*/
 uint16_t sendto(SOCKET s, const uint8_t *buf, uint16_t len, uint8_t *addr, uint16_t port)
 {
   uint16_t ret = 0;
@@ -286,11 +286,11 @@ uint16_t sendto(SOCKET s, const uint8_t *buf, uint16_t len, uint8_t *addr, uint1
 
 
 /**
- * @brief This function is an application I/F function which is used to receive the data in other then
- *  TCP mode. This function is used to receive UDP, IP_RAW and MAC_RAW mode, and handle the header as well.
- *
- * @return  This function return received data size for success else -1.
- */
+   @brief This function is an application I/F function which is used to receive the data in other then
+    TCP mode. This function is used to receive UDP, IP_RAW and MAC_RAW mode, and handle the header as well.
+
+   @return  This function return received data size for success else -1.
+*/
 uint16_t recvfrom(SOCKET s, uint8_t *buf, uint16_t len, uint8_t *addr, uint16_t *port)
 {
   uint8_t head[8];
@@ -360,8 +360,8 @@ uint16_t recvfrom(SOCKET s, uint8_t *buf, uint16_t len, uint8_t *addr, uint16_t 
 }
 
 /**
- * @brief Wait for buffered transmission to complete.
- */
+   @brief Wait for buffered transmission to complete.
+*/
 void flush(SOCKET s) {
   // TODO
 }

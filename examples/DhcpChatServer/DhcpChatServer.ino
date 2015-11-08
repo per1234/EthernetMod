@@ -1,5 +1,5 @@
 /*
-  DHCP Chat  Server
+  DHCP Chat Server
 
   A simple server that distributes any incoming messages to all
   connected clients.  To use, telnet to your device's IP address and type.
@@ -17,7 +17,6 @@
   modified 02 Sept 2015
   by Arturo Guadalupi
   Based on ChatServer example by David A. Mellis
-
 */
 
 #include <SPI.h>
@@ -89,4 +88,3 @@ void loop() {
     Ethernet.maintain();
   }
 }
-

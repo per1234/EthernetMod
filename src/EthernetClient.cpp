@@ -174,6 +174,10 @@ bool EthernetClient::operator==(const EthernetClient& rhs) {
   return _sock == rhs._sock && _sock != MAX_SOCK_NUM && rhs._sock != MAX_SOCK_NUM;
 }
 
+uint8_t EthernetClient::getSocketNumber() {
+  return _sock;
+}
+
 // from: https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd
 uint16_t EthernetClient::localPort() {
   if (_sock == MAX_SOCK_NUM) {

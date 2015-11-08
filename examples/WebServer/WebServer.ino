@@ -14,7 +14,6 @@
   by Tom Igoe
   modified 02 Sept 2015
   by Arturo Guadalupi
-
 */
 
 #include <SPI.h>
@@ -100,4 +99,3 @@ void loop() {
     Ethernet.maintain();
   }
 }
-

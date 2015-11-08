@@ -39,6 +39,7 @@ class EthernetClient : public Client {
     virtual bool operator!=(const EthernetClient& rhs) {
       return !this->operator==(rhs);
     };
+    uint8_t getSocketNumber();
 
     friend class EthernetServer;
 

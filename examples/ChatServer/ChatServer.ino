@@ -13,7 +13,6 @@
   by David A. Mellis
   modified 9 Apr 2012
   by Tom Igoe
-
 */
 
 #include <SPI.h>

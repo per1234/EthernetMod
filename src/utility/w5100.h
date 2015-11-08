@@ -1,24 +1,18 @@
 /*
- * Copyright (c) 2010 by Arduino LLC. All rights reserved.
- *
- * This file is free software; you can redistribute it and/or modify
- * it under the terms of either the GNU General Public License version 2
- * or the GNU Lesser General Public License version 2.1, both as
- * published by the Free Software Foundation.
- */
+   Copyright (c) 2010 by Arduino LLC. All rights reserved.
+
+   This file is free software; you can redistribute it and/or modify
+   it under the terms of either the GNU General Public License version 2
+   or the GNU Lesser General Public License version 2.1, both as
+   published by the Free Software Foundation.
+*/
 
 #ifndef  W5100_H_INCLUDED
 #define W5100_H_INCLUDED
 
 #include <SPI.h>
 
-#define SPI_CS 10
-
-#if defined(ARDUINO_ARCH_AVR)
-#define SPI_ETHERNET_SETTINGS SPISettings(4000000, MSBFIRST, SPI_MODE0)
-#else
-#define SPI_ETHERNET_SETTINGS SPI_CS,SPISettings(4000000, MSBFIRST, SPI_MODE0)
-#endif
+#define ETHERNET_SHIELD_SPI_CS 10
 
 #define MAX_SOCK_NUM 4
 
@@ -29,19 +23,19 @@ typedef uint8_t SOCKET;
 #define IDM_AR1 0x8002
 #define IDM_DR  0x8003
 /*
-class MR {
-public:
+  class MR {
+  public:
   static const uint8_t RST   = 0x80;
   static const uint8_t PB    = 0x10;
   static const uint8_t PPPOE = 0x08;
   static const uint8_t LB    = 0x04;
   static const uint8_t AI    = 0x02;
   static const uint8_t IND   = 0x01;
-};
+  };
 */
 /*
-class IR {
-public:
+  class IR {
+  public:
   static const uint8_t CONFLICT = 0x80;
   static const uint8_t UNREACH  = 0x40;
   static const uint8_t PPPoE    = 0x20;
@@ -50,7 +44,7 @@ public:
   static const uint8_t SOCK2    = 0x04;
   static const uint8_t SOCK3    = 0x08;
   static inline uint8_t SOCK(SOCKET ch) { return (0x01 << ch); };
-};
+  };
 */
 
 class SnMR {
@@ -78,7 +72,7 @@ enum SockCMD {
 };
 
 /*class SnCmd {
-public:
+  public:
   static const uint8_t OPEN      = 0x01;
   static const uint8_t LISTEN    = 0x02;
   static const uint8_t CONNECT   = 0x04;
@@ -88,7 +82,7 @@ public:
   static const uint8_t SEND_MAC  = 0x21;
   static const uint8_t SEND_KEEP = 0x22;
   static const uint8_t RECV      = 0x40;
-};
+  };
 */
 
 class SnIR {
@@ -139,41 +133,41 @@ class W5100Class {
     void init();
 
     /**
-     * @brief This function is being used for copy the data form Receive buffer of the chip to application buffer.
-     *
-     * It calculate the actual physical address where one has to read
-     * the data from Receive buffer. Here also take care of the condition while it exceed
-     * the Rx memory uper-bound of socket.
-     */
+       @brief This function is being used for copy the data form Receive buffer of the chip to application buffer.
+
+       It calculate the actual physical address where one has to read
+       the data from Receive buffer. Here also take care of the condition while it exceed
+       the Rx memory uper-bound of socket.
+    */
     void read_data(SOCKET s, volatile uint16_t src, volatile uint8_t * dst, uint16_t len);
 
     /**
-     * @brief  This function is being called by send() and sendto() function also.
-     *
-     * This function read the Tx write pointer register and after copy the data in buffer update the Tx write pointer
-     * register. User should read upper byte first and lower byte later to get proper value.
-     */
+       @brief  This function is being called by send() and sendto() function also.
+
+       This function read the Tx write pointer register and after copy the data in buffer update the Tx write pointer
+       register. User should read upper byte first and lower byte later to get proper value.
+    */
     void send_data_processing(SOCKET s, const uint8_t *data, uint16_t len);
     /**
-     * @brief A copy of send_data_processing that uses the provided ptr for the
-     *        write offset.  Only needed for the "streaming" UDP API, where
-     *        a single UDP packet is built up over a number of calls to
-     *        send_data_processing_ptr, because TX_WR doesn't seem to get updated
-     *        correctly in those scenarios
-     * @param ptr value to use in place of TX_WR.  If 0, then the value is read
-     *        in from TX_WR
-     * @return New value for ptr, to be used in the next call
-     */
+       @brief A copy of send_data_processing that uses the provided ptr for the
+              write offset.  Only needed for the "streaming" UDP API, where
+              a single UDP packet is built up over a number of calls to
+              send_data_processing_ptr, because TX_WR doesn't seem to get updated
+              correctly in those scenarios
+       @param ptr value to use in place of TX_WR.  If 0, then the value is read
+              in from TX_WR
+       @return New value for ptr, to be used in the next call
+    */
     // FIXME Update documentation
     void send_data_processing_offset(SOCKET s, uint16_t data_offset, const uint8_t *data, uint16_t len);
 
     /**
-     * @brief This function is being called by recv() also.
-     *
-     * This function read the Rx read pointer register
-     * and after copy the data from receive buffer update the Rx write pointer register.
-     * User should read upper byte first and lower byte later to get proper value.
-     */
+       @brief This function is being called by recv() also.
+
+       This function read the Rx read pointer register
+       and after copy the data from receive buffer update the Rx write pointer register.
+       User should read upper byte first and lower byte later to get proper value.
+    */
     void recv_data_processing(SOCKET s, uint8_t *data, uint16_t len, uint8_t peek = 0);
 
     inline void setGatewayIp(uint8_t *_addr);
@@ -330,6 +324,8 @@ class W5100Class {
     uint16_t RBASE[SOCKETS]; // Rx buffer base address
 
   private:
+#if !defined(SPI_HAS_EXTENDED_CS_PIN_HANDLING)
+#define SPI_ETHERNET_SETTINGS SPISettings(4000000, MSBFIRST, SPI_MODE0)
 #if defined(ARDUINO_ARCH_AVR)
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__) || defined(__AVR_ATmega644__)  || defined(__AVR_ATmega644A__) || defined(__AVR_ATmega644P__)  || defined(__AVR_ATmega644PA__)
     inline static void initSS()    {
@@ -372,7 +368,21 @@ class W5100Class {
       PORTB |=  _BV(2);
     };
 #endif
-#endif // ARDUINO_ARCH_AVR
+#else
+    inline static void initSS() {
+      *portModeRegister(digitalPinToPort(ETHERNET_SHIELD_SPI_CS)) |= digitalPinToBitMask(ETHERNET_SHIELD_SPI_CS);
+    }
+    inline static void setSS()   {
+      *portOutputRegister(digitalPinToPort(ETHERNET_SHIELD_SPI_CS)) &= ~digitalPinToBitMask(ETHERNET_SHIELD_SPI_CS);
+    }
+    inline static void resetSS() {
+      *portOutputRegister(digitalPinToPort(ETHERNET_SHIELD_SPI_CS)) |= digitalPinToBitMask(ETHERNET_SHIELD_SPI_CS);
+    }
+#endif
+#else
+#define SPI_ETHERNET_SETTINGS ETHERNET_SHIELD_SPI_CS,SPISettings(4000000, MSBFIRST, SPI_MODE0)
+    // initSS(), setSS(), resetSS() not needed with EXTENDED_CS_PIN_HANDLING
+#endif
 };
 
 extern W5100Class W5100;

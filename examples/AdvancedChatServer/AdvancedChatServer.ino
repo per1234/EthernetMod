@@ -16,7 +16,6 @@
   by Tom Igoe
   redesigned to make use of operator== 25 Nov 2013
   by Norbert Truchsess
-
 */
 
 #include <SPI.h>

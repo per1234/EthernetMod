@@ -1,5 +1,4 @@
 /*
-
   Udp NTP Client
 
   Get the time from a Network Time Protocol (NTP) time server
@@ -15,7 +14,6 @@
   by Arturo Guadalupi
 
   This code is in the public domain.
-
 */
 
 #include <SPI.h>
@@ -109,7 +107,7 @@ void loop() {
 }
 
 // send an NTP request to the time server at the given address
-unsigned long sendNTPpacket(char* address) {
+void sendNTPpacket(char* address) {
   // set all bytes in the buffer to 0
   memset(packetBuffer, 0, NTP_PACKET_SIZE);
   // Initialize values needed to form NTP request
@@ -130,13 +128,3 @@ unsigned long sendNTPpacket(char* address) {
   Udp.write(packetBuffer, NTP_PACKET_SIZE);
   Udp.endPacket();
 }
-
-
-
-
-
-
-
-
-
-

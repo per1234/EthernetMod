@@ -19,7 +19,6 @@
 
   http://www.arduino.cc/en/Tutorial/WebClientRepeating
   This code is in the public domain.
-
 */
 
 #include <SPI.h>
@@ -103,5 +102,3 @@ void httpRequest() {
     Serial.println("connection failed");
   }
 }
-
-
