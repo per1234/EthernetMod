@@ -16,15 +16,15 @@ Modified version of the [Arduino](http://arduino.cc) Ethernet v1.1.1 library. Th
 
 <a id="usage"></a>
 #### Usage
-`EthernetClient.remoteIP()` - See examples/ChatServer.ino for demonstration of using remoteIP.
+`EthernetClient.remoteIP()` - See **File > Examples > EthenetMod > ChatServer** for demonstration of using remoteIP.
 - Returns: The IP address of the remote connection.
   - Type: IPAddress
 
-`EthernetClient.remotePort()` - See examples/ChatServer.ino for demonstration of using remotePort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
+`EthernetClient.remotePort()` - See **File > Examples > EthenetMod > ChatServer** for demonstration of using remotePort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
 - Returns: The port of the remote connection.
   - Type: unsigned int
 
-`EthernetClient.localPort()` - See examples/ChatServer.ino for demonstration of using localPort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
+`EthernetClient.localPort()` - See **File > Examples > EthenetMod > ChatServer** for demonstration of using localPort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
 - Returns: The local port the client is connected to.
   - Type: unsigned int
 
