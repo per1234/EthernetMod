@@ -1,14 +1,19 @@
 Modified Arduino Ethernet Library
 ==========
 
-Modified [Arduino](http://arduino.cc) Ethernet library. This modification adds EthernetClent.remoteIP() and EthernetClient.setClientTimeout() functions and removes the delay from Ethernet.begin().
-
-This library supports Wiznet W5100, W200, and W500 Ethernet controllers with automatic detection. Thanks to [Fede85](https://github.com/Fede85).
+Modified [Arduino](http://arduino.cc) Ethernet library. Forked from https://github.com/arduino/Arduino/pull/2325, thanks to [Fede85](https://github.com/Fede85)!
+- Supports Wiznet W5100, W200, and W500 Ethernet controllers with automatic detection.
+- Added functions:
+  - `EthernetClient.remoteIP()`
+  - `EthernetClient.remotePort()`
+  - `EthernetClient.localPort()`
+  - `EthernetClient.setClientTimeout()`
+- Removed the delay from `Ethernet.begin()`.
 
 
 <a id="installation"></a>
 #### Installation
-- This library is only compatible with Arduino versions 1.5 and up. If you are using Arduino IDE 1.0.x then select the Arduino-IDE-1.0.x branch instead.
+- This library is only compatible with Arduino versions 1.5 and up. If you are using Arduino IDE 1.0.x then select the [Arduino-IDE-1.0.x branch](https://github.com/per1234/EthernetMod/tree/Arduino-IDE-1.0.x) instead.
 - Download the most recent version of the modified Ethernet library here: https://github.com/per1234/EthernetMod/archive/W5x00.zip
 - Extract the downloaded file
 - Rename the extracted folder Ethernet
@@ -18,27 +23,27 @@ This library supports Wiznet W5100, W200, and W500 Ethernet controllers with aut
 
 <a id="usage"></a>
 #### Usage
-`EthernetClient.remoteIP()` - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using remoteIP. Thanks to [Philgaskin on the Arduino forum](http://forum.arduino.cc/index.php?topic=82416.0).
+`EthernetClient.remoteIP()` - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using `remoteIP()`. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
 - Returns: The IP address of the remote connection.
   - Type: IPAddress
 
-`EthernetClient.remotePort()` - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using remotePort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
+`EthernetClient.remotePort()` - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using `remotePort()`. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
 - Returns: The port of the remote connection.
   - Type: unsigned int
 
-`EthernetClient.localPort()` - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using localPort. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
+`EthernetClient.localPort()` - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using `localPort()`. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
 - Returns: The local port the client is connected to.
   - Type: unsigned int
 
-`EthernetClient.setClientTimeout(timeout)` - Set the timeout duration for EthernetClient.connect() and EthernetClient.stop(). The initial value is 1000ms.
+`EthernetClient.setClientTimeout(timeout)` - Set the timeout duration for `EthernetClient.connect()` and `EthernetClient.stop()`. The initial value is 1000ms.
 - Parameter: **timeout** - (ms)The timeout duration value.
   - Type: unsigned int
 - Returns: none
 
-I have removed the delay(300) in Ethernet.begin() so you may need to add a delay in your sketch if it is not reliably initializing the Ethernet controller.
+I have removed the `delay(300)` in `Ethernet.begin()` so you may need to add a delay in your sketch if it is not reliably initializing the Ethernet controller.
 
 For all the standard functions included in the library see the official Arduino Ethernet documentation: http://arduino.cc/en/reference/ethernet
-The read() function in the Client class inherits from Stream so the stream functions are also available, see the Arduino Stream documentation: http://arduino.cc/en/Reference/Stream
+The `read()` function in the Client class inherits from Stream so the Stream functions are also available, see the Arduino Stream documentation: http://arduino.cc/en/Reference/Stream
 
 
 <a id="timeouts"></a>
