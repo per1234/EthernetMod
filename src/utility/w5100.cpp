@@ -86,12 +86,13 @@ void W5x00Class::init(void)
   sockets = 8;  //W5200/500
   if (chipset != W5x00Chipset::W5500) {
     //chipset == W5x00Chipset::W5200
+    CH_BASE = 0x4000;
     uint16_t TXBUF_BASE = 0x8000;
     uint16_t RXBUF_BASE = 0xC000;
 
     if (chipset == W5x00Chipset::W5100) {
       sockets = 4;
-
+      CH_BASE = 0x0400;
       TXBUF_BASE = 0x4000;
       RXBUF_BASE = 0x6000;
     }
