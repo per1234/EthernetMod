@@ -23,19 +23,23 @@ Modified [Arduino](http://arduino.cc) Ethernet library. Forked from https://gith
 
 <a id="usage"></a>
 #### Usage
-**`EthernetClient.remoteIP()`** - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using `remoteIP()`. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
+###### `EthernetClient.remoteIP()`
+See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using this function. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
 - Returns: The IP address of the remote connection.
   - Type: IPAddress
 
-**`EthernetClient.remotePort()`** - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using `remotePort()`. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
+###### `EthernetClient.remotePort()`
+See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using this function. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
 - Returns: The port of the remote connection.
   - Type: unsigned int
 
-**`EthernetClient.localPort()`** - See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using `localPort()`. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
+###### `EthernetClient.localPort()`
+See **File > Examples > EthernetMod(W5x00) > ChatServer** for demonstration of using this function. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
 - Returns: The local port the client is connected to.
   - Type: unsigned int
 
-**`EthernetClient.setClientTimeout(timeout)`** - Set the timeout duration for `EthernetClient.connect()` and `EthernetClient.stop()`. The initial value is 1000ms.
+###### `EthernetClient.setClientTimeout(timeout)`
+Set the timeout duration for `EthernetClient.connect()` and `EthernetClient.stop()`. The initial value is 1000ms.
 - Parameter: **timeout** - (ms)The timeout duration value.
   - Type: unsigned int
 - Returns: none
@@ -52,7 +56,7 @@ The key to the most responsive, reliable Ethernet communication is setting appro
 
 - `EthernetClient.setClientTimeout()`: see information in the **Usage** section above.
 - `EthernetClient.setTimeout()`: (ms)Timeout for all Stream functions. The initial value is 1000ms.
-- W5x00 configuration: You must add `#include <utility/w5100.h>` to your code to make these functions available.
+- W5x00 configuration: You must add `#include <utility/w5100.h>` after the line `#include <Ethernet.h>` in your code to make these functions available.
   - `W5100.setRetransmissionTime()`: (0.1ms)Set the timeout for the W5x00 module. The initial value is 200ms.
   - `W5100.setRetransmissionCount()`: Retransmission Count. 1 is the minimum value. The initial value is 8. 8 retries with 200ms timeout means the W5x00 chip will take 1600ms to timeout with the initial values.
 
