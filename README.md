@@ -21,22 +21,22 @@ Modified version of the [Arduino](http://arduino.cc) Ethernet v1.1.1 library.
 
 <a id="usage"></a>
 #### Usage
-###### `EthernetClient.remoteIP()`
+##### `EthernetClient.remoteIP()`
 See **File > Examples > EthenetMod > ChatServer** for demonstration of using this function. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
 - Returns: The IP address of the remote connection.
   - Type: IPAddress
 
-###### `EthernetClient.remotePort()`
+##### `EthernetClient.remotePort()`
 See **File > Examples > EthenetMod > ChatServer** for demonstration of using this function. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/ca37de4ba4ecbdb941f14ac1fe7dd40f3008af75).
 - Returns: The port of the remote connection.
   - Type: unsigned int
 
-###### `EthernetClient.localPort()`
+##### `EthernetClient.localPort()`
 See **File > Examples > EthenetMod > ChatServer** for demonstration of using this function. Thanks to [ntruchsess](https://github.com/ntruchsess/Arduino-1/commit/937bce1a0bb2567f6d03b15df79525569377dabd).
 - Returns: The local port the client is connected to.
   - Type: unsigned int
 
-###### `EthernetClient.setClientTimeout(timeout)`
+##### `EthernetClient.setClientTimeout(timeout)`
 Set the timeout duration for `EthernetClient.connect()` and `EthernetClient.stop()`. The initial value is 1000ms.
 - Parameter: **timeout** - (ms)The timeout duration value.
   - Type: unsigned int
